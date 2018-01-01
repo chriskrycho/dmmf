@@ -46,8 +46,8 @@ type alias Order =
     }
 
 
-type GizmoCode
-    = Never
+type alias GizmoCode =
+    Never
 
 
 type ProductCode
@@ -58,3 +58,73 @@ type ProductCode
 type OrderQuantity
     = Unit UnitQuantity
     | Kilogram KilogramQuantity
+
+
+type alias AcknowledgementSet =
+    Never
+
+
+type alias OrderPlaced =
+    Never
+
+
+type alias BillableOrderPlaced =
+    Never
+
+
+type alias PlaceOrderEvents =
+    { acknowledgement_set : AcknowledgementSet
+    , order_placed : OrderPlaced
+    , billable_order_placed : BillableOrderPlaced
+    }
+
+
+type alias UnvalidatedOrder =
+    Never
+
+
+type alias ValidatedOrder =
+    Never
+
+
+type alias ValidationError =
+    { field_name : String
+    , error_description : String
+    }
+
+
+type ValidationResponse a
+    = Task a (List ValidationError)
+
+
+type alias ValidateOrder =
+    UnvalidatedOrder -> ValidationResponse ValidatedOrder
+
+
+type alias PlaceOrder =
+    UnvalidatedOrder -> PlaceOrderEvents
+
+
+type alias QuoteForm =
+    Never
+
+
+type alias OrderForm =
+    Never
+
+
+type CategorizedMail
+    = QuoteMail QuoteForm
+    | OrderMail OrderForm
+
+
+type alias ProductCatalog =
+    Never
+
+
+type PricedOrder
+    = Never
+
+
+type alias CalculatePrices =
+    OrderForm -> ProductCatalog -> PricedOrder

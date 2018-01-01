@@ -1,3 +1,5 @@
+extern crate futures;
+
 mod domain;
 
 #[cfg(test)]
