@@ -1,16 +1,33 @@
-type customerId =
-  | CustomerId(int);
-
+/* Product code info */
 type widgetCode =
   | WidgetCode(string);
+
+type gizmoCode =
+  | GizmoCode(string);
+
+type productCode =
+  | Widget(widgetCode)
+  | Gizmo(gizmoCode);
+
+/* Order quantity info */
+type kilogramQuantity =
+  | KilogramQuantity(float);
 
 type unitQuantity =
   | UnitQuantity(int);
 
-type kilogramQuantity =
-  | KilogramQuantity(float);
+type orderQuantity =
+  | Unit(unitQuantity)
+  | Kilogram(kilogramQuantity);
 
+/* Helper -- we'll replace this later */
 type undefined = exn;
+
+type orderId = undefined;
+type orderLineId = undefined;
+
+type customerId =
+  | CustomerId(int);
 
 type customerInfo = undefined;
 
@@ -18,27 +35,26 @@ type shippingAddress = undefined;
 
 type billingAddress = undefined;
 
-type orderLine = undefined;
+type price = undefined;
 
 type billingAmount = undefined;
 
+type orderLine = {
+  id: orderLineId,
+  orderId,
+  productCode,
+  orderQuantity,
+  price
+};
+
 type order = {
+  id: orderId,
   customerInfo,
   shippingAddress,
   billingAddress,
-  orderLine,
+  orderLine: list(orderLine),
   billingAmount
 };
-
-type gizmoCode = undefined;
-
-type productCode =
-  | Widget(widgetCode)
-  | Gizmo(gizmoCode);
-
-type orderQuantity =
-  | Unit(unitQuantity)
-  | Kilogram(kilogramQuantity);
 
 type acknowledgementSent = undefined;
 
@@ -52,21 +68,34 @@ type placeOrderEvents = {
   billableOrderPlaced
 };
 
-type unvalidatedOrder = exn;
-
-type validatedOrder = exn;
-
 type validationError = {
   fieldName: string,
   errorDescription: string
 };
+
+type placeOrderError =
+  | ValidationError(validationError);
+
+type unvalidatedOrderLine = {
+  productCode: string,
+  orderQuantity: int,
+};
+
+type unvalidatedOrder = {
+  orderId: string,
+  customerId: string, /* maybe? */
+  shippingAddress: string,
+  orderLines: list(unvalidatedOrderLine),
+};
+
+type validatedOrder = exn;
 
 type validationResponse('a) =
   Js.Promise.t(Js.Result.t('a, list(validationError)));
 
 type validateOrder = unvalidatedOrder => validationResponse(validatedOrder);
 
-type placeOrder = unvalidatedOrder => placeOrderEvents;
+type placeOrder = unvalidatedOrder => Js.Result.t(placeOrderEvents, placeOrderError);
 
 type quoteForm = exn;
 
@@ -81,3 +110,14 @@ type productCatalog = exn;
 type pricedOrder = exn;
 
 type calculatePrices = (orderForm, productCatalog) => pricedOrder;
+
+type invoiceId =
+  | InvoiceId(int);
+
+type unpaidInvoice = {invoiceId};
+
+type paidInvoice = {invoiceId};
+
+type invoice =
+  | Paid(paidInvoice)
+  | Unpaid(unpaidInvoice);

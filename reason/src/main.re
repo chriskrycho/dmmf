@@ -1,1 +1,1 @@
-Js.log("Hello, BuckleScript and Reason!");
+let g = Domain.WidgetCode("yay")

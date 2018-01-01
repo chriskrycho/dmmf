@@ -1,12 +1,23 @@
 module Domain exposing (..)
 
-
-type CustomerId
-    = CustomerId Int
+-- Product code info
 
 
 type WidgetCode
     = WidgetCode String
+
+
+type GizmoCode
+    = GizmoCode String
+
+
+type ProductCode
+    = Widget WidgetCode
+    | Gizmo GizmoCode
+
+
+
+-- Order quantity info
 
 
 type UnitQuantity
@@ -15,6 +26,23 @@ type UnitQuantity
 
 type KilogramQuantity
     = KilogramQuantity Float
+
+
+type OrderQuantity
+    = Unit UnitQuantity
+    | Kilogram KilogramQuantity
+
+
+type alias OrderId =
+    Never
+
+
+type alias OrderLineId =
+    Never
+
+
+type CustomerId
+    = CustomerId Int
 
 
 type alias CustomerInfo =
@@ -29,7 +57,7 @@ type alias BillingAddress =
     Never
 
 
-type alias OrderLine =
+type alias Price =
     Never
 
 
@@ -37,27 +65,23 @@ type alias BillingAmount =
     Never
 
 
-type alias Order =
-    { customer_info : CustomerInfo
-    , shipping_address : ShippingAddress
-    , billing_address : BillingAddress
-    , order_lines : List OrderLine
-    , billing_amount : BillingAmount
+type alias OrderLine =
+    { id : OrderLineId
+    , orderId : OrderId
+    , productCode : ProductCode
+    , orderQuantity : OrderQuantity
+    , price : Price
     }
 
 
-type alias GizmoCode =
-    Never
-
-
-type ProductCode
-    = Widget WidgetCode
-    | Gizmo GizmoCode
-
-
-type OrderQuantity
-    = Unit UnitQuantity
-    | Kilogram KilogramQuantity
+type alias Order =
+    { id : OrderId
+    , customerInfo : CustomerInfo
+    , shippingAddress : ShippingAddress
+    , billingAddress : BillingAddress
+    , orderLines : List OrderLine
+    , billingAmount : BillingAmount
+    }
 
 
 type alias AcknowledgementSet =
@@ -73,24 +97,38 @@ type alias BillableOrderPlaced =
 
 
 type alias PlaceOrderEvents =
-    { acknowledgement_set : AcknowledgementSet
-    , order_placed : OrderPlaced
-    , billable_order_placed : BillableOrderPlaced
+    { acknowledgementSet : AcknowledgementSet
+    , orderPlaced : OrderPlaced
+    , billableOrderPlaced : BillableOrderPlaced
+    }
+
+
+type alias ValidationError =
+    { fieldName : String
+    , errorDescription : String
+    }
+
+
+type PlaceOrderError
+    = ValidationErrors List ValidationError
+
+
+type alias UnvalidatedOrderLine =
+    { productCode : ProductCode
+    , orderQuantity : OrderQuantity
     }
 
 
 type alias UnvalidatedOrder =
-    Never
+    { orderId : OrderId
+    , customerInfo : CustomerInfo
+    , shippingAddress : ShippingAddress
+    , orderLines : List OrderLine
+    }
 
 
 type alias ValidatedOrder =
     Never
-
-
-type alias ValidationError =
-    { field_name : String
-    , error_description : String
-    }
 
 
 type ValidationResponse a
@@ -102,7 +140,7 @@ type alias ValidateOrder =
 
 
 type alias PlaceOrder =
-    UnvalidatedOrder -> PlaceOrderEvents
+    UnvalidatedOrder -> Result PlaceOrderError PlaceOrderEvents
 
 
 type alias QuoteForm =
@@ -128,3 +166,20 @@ type PricedOrder
 
 type alias CalculatePrices =
     OrderForm -> ProductCatalog -> PricedOrder
+
+
+type InvoiceId
+    = InvoiceId Int
+
+
+type alias PaidInvoice =
+    { invoiceId : InvoiceId }
+
+
+type alias UnpaidInvoice =
+    { invoiceId : InvoiceId }
+
+
+type Invoice
+    = Paid PaidInvoice
+    | Unpaid UnpaidInvoice
