@@ -1,0 +1,8 @@
+{
+  "name": "@chriskrycho/domain-modeling-made-function",
+  "author": "Chris Krycho <chris@chriskrycho.com>",
+  "version": "0.1.0",
+  "devDependencies": {
+    "prettier": "1.9.2"
+  }
+}
