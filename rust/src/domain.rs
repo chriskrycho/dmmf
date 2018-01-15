@@ -79,7 +79,9 @@ struct UnvalidatedOrder {
     order_lines: Vec<UnvalidatedOrderLine>,
 }
 
-type ValidatedOrder = Never;
+struct ValidatedOrder {
+    order_id: String,
+}
 
 // NOTE: this uses `Future`, and is therefore rather... more complicated.
 type ValidationResponse<T> = Future<Item = T, Error = ValidationError>;
