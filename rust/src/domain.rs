@@ -1,3 +1,5 @@
+#![allow(dead_code)]  // for our sanity while building things!
+
 use futures::Future;
 
 pub struct WidgetCode(String);
@@ -29,7 +31,7 @@ type BillingAddress = Never;
 type Price = Never;
 type BillingAmount = Never;
 
-struct OrderLine = {
+struct OrderLine {
     id: OrderLineId,
     order_id: OrderId,
     product_code: ProductCode,
@@ -82,13 +84,17 @@ type ValidatedOrder = Never;
 // NOTE: this uses `Future`, and is therefore rather... more complicated.
 type ValidationResponse<T> = Future<Item = T, Error = ValidationError>;
 
-fn validate_order(unvalidated: UnvalidatedOrder) -> ValidationResponse<ValidatedOrder> {
+#[allow(unused_variables)]  // until we implement this
+fn validate_order(unvalidated: UnvalidatedOrder) -> Box<ValidationResponse<ValidatedOrder>> {
     unimplemented!()
 }
 
+#[allow(unused_variables)]  // until we implement this
 fn place_order(unvalidated: UnvalidatedOrder) -> Result<PlaceOrderEvents, PlaceOrderError> {
     unimplemented!()
 }
+
+type VaidateOrder = Fn(UnvalidatedOrder) -> Box<ValidationResponse<ValidatedOrder>>;
 
 type QuoteForm = Never;
 type OrderForm = Never;

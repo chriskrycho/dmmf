@@ -23,7 +23,12 @@ type orderQuantity =
 /* Helper -- we'll replace this later */
 type undefined = exn;
 
+/*
+  Use it throughout where we don't know the type yet. It will
+  fail to compile anywhere we try to *use* this.
+ */
 type orderId = undefined;
+
 type orderLineId = undefined;
 
 type customerId =
@@ -78,20 +83,19 @@ type placeOrderError =
 
 type unvalidatedOrderLine = {
   productCode: string,
-  orderQuantity: int,
+  orderQuantity: int
 };
 
 type unvalidatedOrder = {
   orderId: string,
   customerId: string, /* maybe? */
   shippingAddress: string,
-  orderLines: list(unvalidatedOrderLine),
+  orderLines: list(unvalidatedOrderLine)
 };
 
 type validatedOrder = exn;
 
-type validationResponse('a) =
-  Js.Promise.t(Js.Result.t('a, list(validationError)));
+type validationResponse('a) = Js.Promise.t(Js.Result.t('a, list(validationError)));
 
 type validateOrder = unvalidatedOrder => validationResponse(validatedOrder);
 
