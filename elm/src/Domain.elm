@@ -1,8 +1,11 @@
 module Domain exposing (..)
 
-import Domain.WidgetCode exposing (WidgetCode, create)
+import Domain.WidgetCode exposing (WidgetCode)
+import Domain.UnitQuantity exposing (UnitQuantity)
+
 
 -- Product code info
+
 
 type GizmoCode
     = GizmoCode String
@@ -15,10 +18,6 @@ type ProductCode
 
 
 -- Order quantity info
-
-
-type UnitQuantity
-    = UnitQuantity Int
 
 
 type KilogramQuantity

@@ -1,41 +1,22 @@
-/* Product code info */
-module WidgetCode: {
-  type widgetCode;
-  let create: string => Js.Result.t(widgetCode, string);
-  let value: widgetCode => string;
-} = {
-  type widgetCode =
-    | WidgetCode(string);
-  let create = code => {
-    let isMatch =
-      Js.Re.fromString("W\\d{4}") |> Js.Re.exec(code) |> Js.Option.isSome;
-    if (isMatch) {
-      Js.Result.Ok(WidgetCode(code));
-    } else {
-      Js.Result.Error(
-        "`WidgetCode` must begin with a 'W' and be followed by 4 digits"
-      );
-    };
-  };
-  let value = (WidgetCode(code)) => code;
-};
+module WidgetCode = Domain_WidgetCode;
+
+module UnitQuantity = Domain_UnitQuantity;
+
+let c = WidgetCode.create("wat");
 
 type gizmoCode =
   | GizmoCode(string);
 
 type productCode =
-  | Widget(widgetCode)
+  | Widget(WidgetCode.widgetCode)
   | Gizmo(gizmoCode);
 
 /* Order quantity info */
 type kilogramQuantity =
   | KilogramQuantity(float);
 
-type unitQuantity =
-  | UnitQuantity(int);
-
 type orderQuantity =
-  | Unit(unitQuantity)
+  | Unit(UnitQuantity.unitQuantity)
   | Kilogram(kilogramQuantity);
 
 /* Helper -- we'll replace this later */
