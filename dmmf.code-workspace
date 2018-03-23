@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": "fsharp",
+			"name": "F♯"
+		},
+		{
+			"path": "elm",
+			"name": "🌳"
+		},
+		{
+			"path": "reason",
+			"name": "Reason"
+		},
+		{
+			"path": "rust",
+			"name": "⚙️"
+		},
+		{
+			"path": ".",
+			"name": "root",
+			"settings": {
+				"files.exclude": ["fsharp", "elm", "reason", "rust"]
+			}
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"fsharp": true,
+			"elm": true,
+			"reason": true,
+			"rust": true
+		}
+	}
+}
