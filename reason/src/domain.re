@@ -1,6 +1,24 @@
 /* Product code info */
-type widgetCode =
-  | WidgetCode(string);
+module WidgetCode: {
+  type widgetCode;
+  let create: string => Js.Result.t(widgetCode, string);
+  let value: widgetCode => string;
+} = {
+  type widgetCode =
+    | WidgetCode(string);
+  let create = code => {
+    let isMatch =
+      Js.Re.fromString("W\\d{4}") |> Js.Re.exec(code) |> Js.Option.isSome;
+    if (isMatch) {
+      Js.Result.Ok(WidgetCode(code));
+    } else {
+      Js.Result.Error(
+        "`WidgetCode` must begin with a 'W' and be followed by 4 digits"
+      );
+    };
+  };
+  let value = (WidgetCode(code)) => code;
+};
 
 type gizmoCode =
   | GizmoCode(string);
@@ -95,11 +113,13 @@ type unvalidatedOrder = {
 
 type validatedOrder = exn;
 
-type validationResponse('a) = Js.Promise.t(Js.Result.t('a, list(validationError)));
+type validationResponse('a) =
+  Js.Promise.t(Js.Result.t('a, list(validationError)));
 
 type validateOrder = unvalidatedOrder => validationResponse(validatedOrder);
 
-type placeOrder = unvalidatedOrder => Js.Result.t(placeOrderEvents, placeOrderError);
+type placeOrder =
+  unvalidatedOrder => Js.Result.t(placeOrderEvents, placeOrderError);
 
 type quoteForm = exn;
 

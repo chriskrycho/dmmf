@@ -1,11 +1,8 @@
 module Domain exposing (..)
 
+import Domain.WidgetCode exposing (WidgetCode, create)
+
 -- Product code info
-
-
-type WidgetCode
-    = WidgetCode String
-
 
 type GizmoCode
     = GizmoCode String

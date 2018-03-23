@@ -1,9 +1,47 @@
-#![allow(dead_code)]  // for our sanity while building things!
+#![allow(dead_code)] // for our sanity while building things!
 
 use futures::Future;
+use regex::Regex;
 
+#[derive(PartialEq, Debug)]
 pub struct WidgetCode(String);
+
+impl WidgetCode {
+    pub fn create(code: &str) -> Result<WidgetCode, String> {
+        let re = Regex::new(r"W\d{4}").expect(r"W\d{4} is a valid regex");
+        if re.is_match(code) {
+            Ok(WidgetCode(String::from(code)))
+        } else {
+            Err(String::from(
+                "`WidgetCode` must begin with a 'W' and be followed by 4 digits",
+            ))
+        }
+    }
+
+    pub fn value(&self) -> &str {
+        &self.0
+    }
+}
+
+#[derive(PartialEq, Debug)]
 pub struct GizmoCode(String);
+
+impl GizmoCode {
+    pub fn create(code: &str) -> Result<GizmoCode, String> {
+        let re = Regex::new(r"G\d{3}").expect(r"G\d{3} is a valid regex");
+        if re.is_match(code) {
+            Ok(GizmoCode(String::from(code)))
+        } else {
+            Err(String::from(
+                "`GizmoCode` must begin with a 'G' and be followed by 3 digits",
+            ))
+        }
+    }
+
+    pub fn value(&self) -> &str {
+        &self.0
+    }
+}
 
 pub enum ProductCode {
     Widget(WidgetCode),
@@ -64,7 +102,7 @@ struct ValidationError {
 }
 
 enum PlaceOrderError {
-    ValidationError(Vec<ValidationError>)
+    ValidationError(Vec<ValidationError>),
 }
 
 struct UnvalidatedOrderLine {
@@ -86,12 +124,12 @@ struct ValidatedOrder {
 // NOTE: this uses `Future`, and is therefore rather... more complicated.
 type ValidationResponse<T> = Future<Item = T, Error = ValidationError>;
 
-#[allow(unused_variables)]  // until we implement this
+#[allow(unused_variables)] // until we implement this
 fn validate_order(unvalidated: UnvalidatedOrder) -> Box<ValidationResponse<ValidatedOrder>> {
     unimplemented!()
 }
 
-#[allow(unused_variables)]  // until we implement this
+#[allow(unused_variables)] // until we implement this
 fn place_order(unvalidated: UnvalidatedOrder) -> Result<PlaceOrderEvents, PlaceOrderError> {
     unimplemented!()
 }
@@ -109,7 +147,7 @@ enum CategorizedMail {
 type ProductCatalog = Never;
 type PricedOrder = Never;
 
-fn calculate_prices(orderForm: OrderForm, catalog: ProductCatalog) -> PricedOrder {
+fn calculate_prices(order_form: OrderForm, catalog: ProductCatalog) -> PricedOrder {
     unimplemented!()
 }
 
