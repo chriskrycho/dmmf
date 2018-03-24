@@ -1,22 +1,28 @@
 module WidgetCode = Domain_WidgetCode;
 
+module GizmoCode = Domain_GizmoCode;
+
 module UnitQuantity = Domain_UnitQuantity;
+
+module KilogramQuantity = Domain_KilogramQuantity;
+
+open WidgetCode;
+
+open GizmoCode;
+
+open UnitQuantity;
+
+open KilogramQuantity;
 
 let c = WidgetCode.create("wat");
 
-type gizmoCode =
-  | GizmoCode(string);
-
 type productCode =
-  | Widget(WidgetCode.widgetCode)
+  | Widget(widgetCode)
   | Gizmo(gizmoCode);
 
 /* Order quantity info */
-type kilogramQuantity =
-  | KilogramQuantity(float);
-
 type orderQuantity =
-  | Unit(UnitQuantity.unitQuantity)
+  | Unit(unitQuantity)
   | Kilogram(kilogramQuantity);
 
 /* Helper -- we'll replace this later */

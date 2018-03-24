@@ -11,3 +11,5 @@ let create = qty =>
   };
 
 let value = (UnitQuantity(qty)) => qty;
+
+let minimum = UnitQuantity(1);
