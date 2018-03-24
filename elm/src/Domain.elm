@@ -1,14 +1,12 @@
 module Domain exposing (..)
 
-import Domain.WidgetCode exposing (WidgetCode)
-import Domain.UnitQuantity exposing (UnitQuantity)
+import Domain.WidgetCode as WidgetCode exposing (WidgetCode)
+import Domain.GizmoCode as GizmoCode exposing (GizmoCode)
+import Domain.UnitQuantity as UnitQuantity exposing (UnitQuantity)
+import Domain.KilogramQuantity as KilogramQuantity exposing (KilogramQuantity)
 
 
 -- Product code info
-
-
-type GizmoCode
-    = GizmoCode String
 
 
 type ProductCode
@@ -18,10 +16,6 @@ type ProductCode
 
 
 -- Order quantity info
-
-
-type KilogramQuantity
-    = KilogramQuantity Float
 
 
 type OrderQuantity

@@ -15,6 +15,7 @@ module WidgetCode =
 
     let value (WidgetCode code) = code
 
+
 type GizmoCode = private GizmoCode of string
 module GizmoCode = 
     let create code =
@@ -40,6 +41,8 @@ module UnitQuantity =
             Error "`UnitQuantity` cannot be greater than 1000"
         else
             Ok (UnitQuantity qty)
+    
+    let minimum = UnitQuantity 1u
 
     let value (UnitQuantity qty) = qty
 
@@ -56,6 +59,8 @@ module KilogramQuantity =
             Ok (KilogramQuantity kgs)
 
     let value (KilogramQuantity qty) = qty
+
+    let minimum = KilogramQuantity 0.05m<kilogram>
 
 
 type OrderQuantity =

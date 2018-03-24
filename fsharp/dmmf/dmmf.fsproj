@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Domain.fs" />
+    <Compile Include="domain.fs" />
     <Compile Include="dmmf.fs" />
     <None Include="App.config" />
   </ItemGroup>

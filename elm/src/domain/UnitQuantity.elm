@@ -18,3 +18,8 @@ create qty =
 value : UnitQuantity -> Int
 value (UnitQuantity qty) =
     qty
+
+
+minimum : UnitQuantity
+minimum =
+    UnitQuantity 1
