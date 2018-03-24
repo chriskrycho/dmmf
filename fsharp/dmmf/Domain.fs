@@ -1,4 +1,4 @@
-namespace OrderTaking.Domain
+namespace Domain
 
 open Microsoft.FSharp.Data.UnitSystems.SI.UnitNames
 open System.Text.RegularExpressions
