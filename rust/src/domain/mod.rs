@@ -1,98 +1,21 @@
 #![allow(dead_code)] // for our sanity while building things!
 
+mod widget_code;
+mod gizmo_code;
+mod unit_quantity;
+mod kilogram_quantity;
+
 use futures::Future;
-use regex::Regex;
 
-#[derive(PartialEq, Debug)]
-pub struct WidgetCode(String);
-
-impl WidgetCode {
-    pub fn create(code: &str) -> Result<WidgetCode, String> {
-        let re = Regex::new(r"W\d{4}").expect(r"W\d{4} is a valid regex");
-        if re.is_match(code) {
-            Ok(WidgetCode(String::from(code)))
-        } else {
-            Err(String::from(
-                "`WidgetCode` must begin with a 'W' and be followed by 4 digits",
-            ))
-        }
-    }
-
-    pub fn value(&self) -> &str {
-        &self.0
-    }
-}
-
-#[derive(PartialEq, Debug)]
-pub struct GizmoCode(String);
-
-impl GizmoCode {
-    pub fn create(code: &str) -> Result<GizmoCode, String> {
-        let re = Regex::new(r"G\d{3}").expect(r"G\d{3} is a valid regex");
-        if re.is_match(code) {
-            Ok(GizmoCode(String::from(code)))
-        } else {
-            Err(String::from(
-                "`GizmoCode` must begin with a 'G' and be followed by 3 digits",
-            ))
-        }
-    }
-
-    pub fn value(&self) -> &str {
-        &self.0
-    }
-}
+pub(crate) use self::widget_code::WidgetCode;
+pub(crate) use self::gizmo_code::GizmoCode;
+pub(crate) use self::unit_quantity::UnitQuantity;
+pub(crate) use self::kilogram_quantity::KilogramQuantity;
 
 #[derive(PartialEq, Debug)]
 pub enum ProductCode {
     Widget(WidgetCode),
     Gizmo(GizmoCode),
-}
-
-#[derive(PartialEq, Debug)]
-pub struct UnitQuantity(u32);
-
-impl UnitQuantity {
-    pub fn create(qty: u32) -> Result<UnitQuantity, String> {
-        match qty {
-            0 => Err(String::from("`UnitQuantity` cannot be less than 1")),
-            1...1000 => Ok(UnitQuantity(qty)),
-            _ => Err(String::from("`UnitQuantity` cannot be greater than 1000")),
-        }
-    }
-
-    pub fn value(&self) -> u32 {
-        self.0
-    }
-
-    pub fn minimum() -> UnitQuantity {
-        UnitQuantity(1)
-    }
-}
-
-#[derive(PartialEq, Debug)]
-pub struct KilogramQuantity(f32);
-
-impl KilogramQuantity {
-    pub fn create(qty: f32) -> Result<KilogramQuantity, String> {
-        if qty < 0.05 {
-            Err(String::from("`KilogramQuantity` cannot be less than 0.05"))
-        } else if qty > 1000.0 {
-            Err(String::from(
-                "`KilogramQuantity` cannot be more than 1000.00",
-            ))
-        } else {
-            Ok(KilogramQuantity(qty))
-        }
-    }
-
-    pub fn value(&self) -> f32 {
-        self.0
-    }
-
-    pub fn minimum() -> KilogramQuantity {
-        KilogramQuantity(0.05)
-    }
 }
 
 #[derive(PartialEq, Debug)]
