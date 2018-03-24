@@ -1,67 +1,12 @@
-namespace Domain
+module Domain
 
-open Microsoft.FSharp.Data.UnitSystems.SI.UnitNames
-open System.Text.RegularExpressions
+open Domain
 
 // Product code info
-
-type WidgetCode = private WidgetCode of string
-module WidgetCode =
-    let create code =
-        if Regex.IsMatch(code, @"W\d{4}") then
-            Ok (WidgetCode code)
-        else
-            Error "`WidgetCode` must begin with a 'W' and be followed by 4 digits"
-
-    let value (WidgetCode code) = code
-
-
-type GizmoCode = private GizmoCode of string
-module GizmoCode = 
-    let create code =
-        if Regex.IsMatch(code, @"G\d{3}") then
-            Ok (GizmoCode code)
-        else
-            Error "`GizmoCode` must begin with a 'G' and be followed by 3 digits"
-
-    let value (GizmoCode code) = code
-
 
 type ProductCode =
     | Widget of WidgetCode
     | Gizmo of GizmoCode
-
-
-type UnitQuantity = private UnitQuantity of uint32 // between 1 and 1000
-module UnitQuantity =
-    let create qty =
-        if qty < 1u then
-            Error "`UnitQuantity` cannot be less than 1"
-        else if qty > 1000u then
-            Error "`UnitQuantity` cannot be greater than 1000"
-        else
-            Ok (UnitQuantity qty)
-    
-    let minimum = UnitQuantity 1u
-
-    let value (UnitQuantity qty) = qty
-
-
-type KilogramQuantity = private KilogramQuantity of decimal<kilogram>
-module KilogramQuantity =
-    let create qty =
-        if qty < 0.05m then
-            Error "`KilogramQuantity` cannot be less than 0.05"
-        else if qty > 1000.00m then
-            Error "`KilogramQuantity` cannot be more than 1000.00"
-        else
-            let kgs = qty * 1.0m<kilogram>
-            Ok (KilogramQuantity kgs)
-
-    let value (KilogramQuantity qty) = qty
-
-    let minimum = KilogramQuantity 0.05m<kilogram>
-
 
 type OrderQuantity =
     | Unit of UnitQuantity

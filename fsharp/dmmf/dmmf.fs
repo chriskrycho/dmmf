@@ -4,7 +4,7 @@ open Domain
 
 [<EntryPoint>]
 let main _argv =
-    let wc = WidgetCode.create
+    let _wc = Domain.WidgetCode.create "W1234"
     let unit =
         match (UnitQuantity.create 23u) with
         | Result.Ok value -> value
