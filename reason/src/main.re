@@ -1,9 +1,9 @@
-let g = Domain.WidgetCode.create("yay");
+let valid = Ordering.WidgetCode.create("W1234");
 
-let f = Domain.UnitQuantity.create(12);
+let f = Ordering.UnitQuantity.create(12);
 
-let h =
-  switch f {
-  | Js.Result.Ok(v) => Domain.UnitQuantity.value(v)
-  | Js.Result.Error(_) => 0
+let unwrapped =
+  switch valid {
+  | Js.Result.Ok(v) => Ordering.WidgetCode.value(v)
+  | Js.Result.Error(_) => ""
   };

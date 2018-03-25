@@ -1,4 +1,4 @@
-namespace Domain
+namespace Ordering
 
 type UnitQuantity = private UnitQuantity of uint32 // between 1 and 1000
 module UnitQuantity =

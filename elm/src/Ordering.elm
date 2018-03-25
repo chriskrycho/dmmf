@@ -1,9 +1,9 @@
-module Domain exposing (..)
+module Ordering exposing (..)
 
-import Domain.WidgetCode as WidgetCode exposing (WidgetCode)
-import Domain.GizmoCode as GizmoCode exposing (GizmoCode)
-import Domain.UnitQuantity as UnitQuantity exposing (UnitQuantity)
-import Domain.KilogramQuantity as KilogramQuantity exposing (KilogramQuantity)
+import Ordering.WidgetCode as WidgetCode exposing (WidgetCode, create, value)
+import Ordering.GizmoCode as GizmoCode exposing (GizmoCode)
+import Ordering.UnitQuantity as UnitQuantity exposing (UnitQuantity)
+import Ordering.KilogramQuantity as KilogramQuantity exposing (KilogramQuantity)
 
 
 -- Product code info

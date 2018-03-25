@@ -1,10 +1,10 @@
 module DMMF
 
-open Domain
+open Ordering
 
 [<EntryPoint>]
 let main _argv =
-    let _wc = Domain.WidgetCode.create "W1234"
+    let _wc = Ordering.WidgetCode.create "W1234"
     let unit =
         match (UnitQuantity.create 23u) with
         | Result.Ok value -> value

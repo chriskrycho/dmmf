@@ -4,12 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="domain/WidgetCode.fs" />
-    <Compile Include="domain/GizmoCode.fs" />
-    <Compile Include="domain/UnitQuantity.fs" />
-    <Compile Include="domain/KilogramQuantity.fs" />
-    <Compile Include="domain.fs" />
-    <Compile Include="dmmf.fs" />
+    <Compile Include="ordering/WidgetCode.fs" />
+    <Compile Include="ordering/GizmoCode.fs" />
+    <Compile Include="ordering/UnitQuantity.fs" />
+    <Compile Include="ordering/KilogramQuantity.fs" />
+    <Compile Include="Ordering.fs" />
+    <Compile Include="Dmmf.fs" />
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

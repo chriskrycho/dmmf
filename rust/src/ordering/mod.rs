@@ -1,21 +1,31 @@
 #![allow(dead_code)] // for our sanity while building things!
 
-mod widget_code;
 mod gizmo_code;
-mod unit_quantity;
 mod kilogram_quantity;
+mod unit_quantity;
+mod widget_code;
 
 use futures::Future;
 
-pub(crate) use self::widget_code::WidgetCode;
 pub(crate) use self::gizmo_code::GizmoCode;
-pub(crate) use self::unit_quantity::UnitQuantity;
 pub(crate) use self::kilogram_quantity::KilogramQuantity;
+pub(crate) use self::unit_quantity::UnitQuantity;
+pub(crate) use self::widget_code::WidgetCode;
 
 #[derive(PartialEq, Debug)]
 pub enum ProductCode {
     Widget(WidgetCode),
     Gizmo(GizmoCode),
+}
+
+fn demo_it() {
+    let valid = WidgetCode::create("W1234");
+    let invalid = WidgetCode::create("wat");
+
+    let unwrapped = match valid {
+        Ok(ref code) => code.value(),
+        Err(_) => "",
+    };
 }
 
 #[derive(PartialEq, Debug)]

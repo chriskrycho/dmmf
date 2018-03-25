@@ -1,4 +1,4 @@
-module Domain.KilogramQuantity exposing (KilogramQuantity, create, value, minimum)
+module Ordering.KilogramQuantity exposing (KilogramQuantity, create, value, minimum)
 
 
 type KilogramQuantity

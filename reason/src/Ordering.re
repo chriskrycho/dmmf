@@ -1,10 +1,10 @@
-module WidgetCode = Domain_WidgetCode;
+module WidgetCode = Ordering_WidgetCode;
 
-module GizmoCode = Domain_GizmoCode;
+module GizmoCode = Ordering_GizmoCode;
 
-module UnitQuantity = Domain_UnitQuantity;
+module UnitQuantity = Ordering_UnitQuantity;
 
-module KilogramQuantity = Domain_KilogramQuantity;
+module KilogramQuantity = Ordering_KilogramQuantity;
 
 open WidgetCode;
 
@@ -14,11 +14,19 @@ open UnitQuantity;
 
 open KilogramQuantity;
 
-let c = WidgetCode.create("wat");
-
 type productCode =
   | Widget(widgetCode)
   | Gizmo(gizmoCode);
+
+let valid = WidgetCode.create("W1234");
+
+let invalid = WidgetCode.create("wat");
+
+let unwrapped =
+  switch valid {
+  | Js.Result.Ok(code) => WidgetCode.value(code)
+  | Js.Result.Error(_) => ""
+  };
 
 /* Order quantity info */
 type orderQuantity =

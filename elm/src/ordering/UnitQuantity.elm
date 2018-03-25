@@ -1,4 +1,4 @@
-module Domain.UnitQuantity exposing (UnitQuantity, create, value)
+module Ordering.UnitQuantity exposing (UnitQuantity, create, value)
 
 
 type UnitQuantity

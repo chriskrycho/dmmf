@@ -1,4 +1,4 @@
-module Domain.GizmoCode exposing (GizmoCode)
+module Ordering.GizmoCode exposing (GizmoCode)
 
 import Regex exposing (contains, regex)
 

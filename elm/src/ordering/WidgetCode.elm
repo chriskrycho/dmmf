@@ -1,4 +1,4 @@
-module Domain.WidgetCode exposing (WidgetCode, create)
+module Ordering.WidgetCode exposing (WidgetCode, create, value)
 
 import Regex exposing (contains, regex)
 

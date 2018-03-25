@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Domain exposing (..)
+import Ordering exposing (..)
 import Html exposing (Html, div, h1, img, text)
 import Html.Attributes exposing (src)
 

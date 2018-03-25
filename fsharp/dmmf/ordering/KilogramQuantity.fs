@@ -1,4 +1,4 @@
-namespace Domain
+namespace Ordering
 
 open Microsoft.FSharp.Data.UnitSystems.SI.UnitNames
 

@@ -1,4 +1,4 @@
-namespace Domain
+namespace Ordering
 
 open System.Text.RegularExpressions
 
