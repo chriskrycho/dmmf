@@ -1,4 +1,4 @@
-type widgetCode;
+type widgetCode = pri | WidgetCode(string);
 
 let create: string => Js.Result.t(widgetCode, string);
 

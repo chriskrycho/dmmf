@@ -1,4 +1,4 @@
-type kilogramQuantity;
+type kilogramQuantity = pri | KilogramQuantity(float);
 
 let create: float => Js.Result.t(kilogramQuantity, string);
 

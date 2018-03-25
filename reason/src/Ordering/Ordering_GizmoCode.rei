@@ -1,4 +1,4 @@
-type gizmoCode;
+type gizmoCode = pri | GizmoCode(string);
 
 let create: string => Js.Result.t(gizmoCode, string);
 

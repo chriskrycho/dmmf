@@ -14,6 +14,8 @@ open UnitQuantity;
 
 open KilogramQuantity;
 
+type breakfast = pri | Waffles(string) | Pancake(string);
+
 type productCode =
   | Widget(widgetCode)
   | Gizmo(gizmoCode);
