@@ -9,6 +9,8 @@
         ".paket": true,
         "build": true,
         "packages": true,
-        "paket-files": true
+        "paket-files": true,
+        "**/bin": true,
+        "**/obj": true
     }
 }

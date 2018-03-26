@@ -4,7 +4,7 @@ open System.Text.RegularExpressions
 
 type WidgetCode = private WidgetCode of string
 module WidgetCode =
-    let create code =
+    let create (code : string) : Result<WidgetCode, string> =
         if Regex.IsMatch(code, @"W\d{4}") then
             Ok (WidgetCode code)
         else
