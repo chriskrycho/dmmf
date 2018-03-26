@@ -2,11 +2,19 @@
 	"folders": [
 		{
 			"path": "fsharp",
-			"name": "F♯"
+			"name": "F♯",
+			"settings": {
+				"files.exclude": {
+					"/fsharp/build.cmd": true
+				}
+			}
 		},
 		{
 			"path": "elm",
-			"name": "🌳"
+			"name": "🌳",
+			"settings": {
+
+			}
 		},
 		{
 			"path": "reason",
@@ -19,22 +27,7 @@
 		{
 			"path": ".",
 			"name": "root",
-			"settings": {
-				"files.exclude": ["fsharp", "elm", "reason", "rust"]
-			}
 		}
 	],
-	"settings": {
-		"files.exclude": {
-			"**/.git": true,
-			"**/.svn": true,
-			"**/.hg": true,
-			"**/CVS": true,
-			"**/.DS_Store": true,
-			"fsharp": true,
-			"elm": true,
-			"reason": true,
-			"rust": true
-		}
-	}
+	"settings": {}
 }

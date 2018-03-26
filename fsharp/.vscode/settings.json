@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        ".fake": true,
+        ".paket": true,
+        "build": true,
+        "packages": true,
+        "paket-files": true
+    }
+}

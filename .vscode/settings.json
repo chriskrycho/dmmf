@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "fsharp": true,
+        "rust": true,
+        "elm": true,
+        "lib": true,
+        "reason": true
+    }
+}
