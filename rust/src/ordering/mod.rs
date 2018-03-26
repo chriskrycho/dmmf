@@ -18,16 +18,6 @@ pub enum ProductCode {
     Gizmo(GizmoCode),
 }
 
-fn demo_it() {
-    let valid = WidgetCode::create("W1234");
-    let invalid = WidgetCode::create("wat");
-
-    let unwrapped = match valid {
-        Ok(ref code) => code.value(),
-        Err(_) => "",
-    };
-}
-
 #[derive(PartialEq, Debug)]
 enum OrderQuantity {
     Unit(UnitQuantity),
