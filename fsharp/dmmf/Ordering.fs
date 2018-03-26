@@ -13,15 +13,6 @@ type OrderQuantity =
     | Unit of UnitQuantity
     | Kilogram of KilogramQuantity
 
-module DemoIt =
-    let valid = WidgetCode.create "W1234"
-    let invalid = WidgetCode.create "wat"
-    
-    let unwrapped =
-        match valid with
-        | Ok(code) -> WidgetCode.value code
-        | Error(_) -> ""
-
     
 // Helper -- we'll replace this later
 type Undefined = exn
